@@ -1,9 +1,16 @@
 import xml.etree.ElementTree as ET
 import urllib.parse,urllib.request,urllib.error
-from week 3.bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 url = input("Enter - ")
-xml = urllib.urlrequest.urlopen(url).read()
-soup = BeautifulSoup(xml,'xml.parser')
+xml = urllib.request.urlopen(url).read()
+tree = ET.fromstring(xml)
+counts = tree.findall('.//count')
+c = 0
+s = 0
+for count in counts:
+    s = s + int(count.text)
+    c = c + 1
 
-print(soup)
+print("Count: ",c)
+print("Sum:",s)
